@@ -86,43 +86,6 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile7`, function (sprite, l
     next_level()
 })
 controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
-    if (snake_player.image == img`
-        . . . c c c c c c c c c c . . . 
-        . . c 6 1 1 1 1 1 7 6 6 c c . . 
-        . c 6 1 1 1 1 1 6 6 6 6 6 c . . 
-        . c 1 1 1 1 1 6 6 6 6 6 6 c . . 
-        . c 1 1 1 1 7 6 6 c 6 6 6 c c c 
-        . c 6 7 7 2 7 7 c f 6 7 7 7 7 c 
-        . . c 6 2 7 7 7 f c c 7 7 7 c . 
-        . . f c c c c 7 7 6 f c c c . . 
-        . f 7 7 7 7 6 c 7 7 6 f . . . . 
-        f 7 7 7 7 7 7 7 7 7 7 f . . . . 
-        f 7 6 f 6 6 f 6 7 7 7 f . . . . 
-        c 7 c 6 6 6 6 c 7 7 7 c . . . . 
-        c 6 7 7 7 7 7 7 7 7 6 c . . . . 
-        . c 7 7 7 7 7 7 7 7 c . . . . . 
-        . . c 6 7 7 7 7 6 c . . . . . . 
-        . . . c c c c c c . . . . . . . 
-        `) {
-        snake_player.setImage(img`
-            . . . c c c c c c c c c c . . . 
-            . . c c 6 6 7 1 1 1 1 1 6 c . . 
-            . . c 6 6 6 6 6 1 1 1 1 1 6 c . 
-            . . c 6 6 6 6 6 6 1 1 1 1 1 c . 
-            c c c 6 6 6 c 6 6 7 1 1 1 1 c . 
-            c 7 7 7 7 6 f c 7 7 2 7 7 6 c . 
-            . c 7 7 7 c c f 7 7 7 2 6 c . . 
-            . . c c c f 6 7 7 c c c c f . . 
-            . . . . f 6 7 7 c 6 7 7 7 7 f . 
-            . . . . f 7 7 7 7 7 7 7 7 7 7 f 
-            . . . . f 7 7 7 6 f 6 6 f 6 7 f 
-            . . . . c 7 7 7 c 6 6 6 6 c 7 c 
-            . . . . c 6 7 7 7 7 7 7 7 7 6 c 
-            . . . . . c 7 7 7 7 7 7 7 7 c . 
-            . . . . . . c 6 7 7 7 7 6 c . . 
-            . . . . . . . c c c c c c . . . 
-            `)
-    }
     if (level > -1) {
         snake_player.setImage(img`
             . . . c c c c c c . . . . . . . 
@@ -141,6 +104,26 @@ controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
             . c 6 1 1 1 1 1 6 6 6 6 6 c . . 
             . . c 6 1 1 1 1 1 7 6 6 c c . . 
             . . . c c c c c c c c c c . . . 
+            `)
+    }
+    if (snake_player.kind() == SpriteKind.udplayer) {
+        snake_player.setImage(img`
+            . . . c c c c c c c c c c . . . 
+            . . c 6 1 1 1 1 1 7 6 6 c c . . 
+            . c 6 1 1 1 1 1 6 6 6 6 6 c . . 
+            . c 1 1 1 1 1 6 6 6 6 6 6 c . . 
+            . c 1 1 1 1 7 6 6 c 6 6 6 c c c 
+            . c 6 7 7 2 7 7 c f 6 7 7 7 7 c 
+            . . c 6 2 7 7 7 f c c 7 7 7 c . 
+            . . f c c c c 7 7 6 f c c c . . 
+            . f 7 7 7 7 6 c 7 7 6 f . . . . 
+            f 7 7 7 7 7 7 7 7 7 7 f . . . . 
+            f 7 6 f 6 6 f 6 7 7 7 f . . . . 
+            c 7 c 6 6 6 6 c 7 7 7 c . . . . 
+            c 6 7 7 7 7 7 7 7 7 6 c . . . . 
+            . c 7 7 7 7 7 7 7 7 c . . . . . 
+            . . c 6 7 7 7 7 6 c . . . . . . 
+            . . . c c c c c c . . . . . . . 
             `)
     }
 })
@@ -566,7 +549,116 @@ function next_level () {
     }
     if (level == 2) {
         sprites.destroyAllSpritesOfKind(SpriteKind.coin)
+        sprites.destroyAllSpritesOfKind(SpriteKind.udplayer)
+        portal_lvl_1_lvl_2 = sprites.create(img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . 3 . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            `, SpriteKind.portal)
+        snake_player = sprites.create(img`
+            . . . c c c c c c . . . . . . . 
+            . . c 6 7 7 7 7 6 c . . . . . . 
+            . c 7 7 7 7 7 7 7 7 c . . . . . 
+            c 6 7 7 7 7 7 7 7 7 6 c . . . . 
+            c 7 c 6 6 6 6 c 7 7 7 c . . . . 
+            f 7 6 f 6 6 f 6 7 7 7 f . . . . 
+            f 7 7 7 7 7 7 7 7 7 7 f . . . . 
+            . f 7 7 7 7 6 c 7 7 6 f . . . . 
+            . . f c c c c 7 7 6 f c c c . . 
+            . . c 6 2 7 7 7 f c c 7 7 7 c . 
+            . c 6 7 7 2 7 7 c f 6 7 7 7 7 c 
+            . c 1 1 1 1 7 6 6 c 6 6 6 c c c 
+            . c 1 1 1 1 1 6 6 6 6 6 6 c . . 
+            . c 6 1 1 1 1 1 6 6 6 6 6 c . . 
+            . . c 6 1 1 1 1 1 7 6 6 c c . . 
+            . . . c c c c c c c c c c . . . 
+            `, SpriteKind.Player)
+        controller.moveSprite(snake_player, 100, 0)
         snake_player.ay = 350
+        for (let value of tiles.getTilesByType(assets.tile`myTile5`)) {
+            coins = sprites.create(img`
+                . . . . . . . . . . . . . . . . 
+                . . . . . . f f f f . . . . . . 
+                . . . . . f 5 5 5 5 f . . . . . 
+                . . . . f 5 5 5 5 5 5 f . . . . 
+                . . . f 5 5 7 7 7 7 5 5 f . . . 
+                . . f 5 5 7 f 7 7 f 7 5 5 f . . 
+                . . f 5 5 5 7 7 2 7 5 5 5 f . . 
+                . . f 5 5 5 5 7 7 5 5 5 6 f . . 
+                . . f 5 5 5 5 7 7 5 5 5 7 f . . 
+                . . f 5 5 5 5 7 7 7 7 5 7 f . . 
+                . . f 5 5 5 5 7 7 7 7 7 7 f . . 
+                . . f 5 5 5 5 5 7 7 7 7 5 f . . 
+                . . . f 5 5 5 5 5 5 5 5 5 f . . 
+                . . . f 5 5 5 5 5 5 5 5 f . . . 
+                . . . . f 5 5 5 5 5 5 f . . . . 
+                . . . . . f f f f f f 1 . . . . 
+                `, SpriteKind.coin)
+            tiles.placeOnTile(coins, value)
+            tiles.setTileAt(value, assets.tile`transparency16`)
+        }
+        tiles.placeOnRandomTile(portal_lvl_1_lvl_2, assets.tile`myTile7`)
+        animation.runImageAnimation(
+        portal_lvl_1_lvl_2,
+        [img`
+            ...........3........
+            .3..3...8........3..
+            ....................
+            ......fffffff.......
+            .3..ffaaaaaaaff.....
+            ...ffabbbbbbbaff....
+            ...fabfffffffbaf.3..
+            ..fabfc88888cfbaf...
+            ..fabf8ccccc8fbaf...
+            8.fabf8ccccc8fbaf...
+            ..fabf8ccccc8fbaf...
+            ..fabf8ccccc8fbaf.3.
+            ..fabf8ccccc8fbaf...
+            ..fabfc88888cfbaf...
+            ...fabfffffffbaf....
+            ...ffabbbbbbbaff....
+            ....ffaaaaaaaff.....
+            .3....fffffff.....3.
+            ....................
+            ..........3.........
+            `,img`
+            a..a......8..a......
+            ......8............b
+            .............8......
+            a..8..fffffff....a..
+            ....ffaaaaaaaff.....
+            ...ffafffffffaff....
+            ...fafbbbbbbbfaf...8
+            ..fafbcfffffcbfaf...
+            ..fafbfcccccfbfaf...
+            ..fafbfc888cfbfaf..a
+            ..fafbfc8c8cfbfaf...
+            ..fafbfc888cfbfaf.8.
+            ..fafbfcccccfbfaf...
+            ..fafbcfffffcbfaf...
+            a..fafbbbbbbbfaf...b
+            ...ffafffffffaff....
+            ....ffaaaaaaaff....a
+            .b....fffffff.......
+            .............a.aa...
+            ..........b....a....
+            `],
+        500,
+        true
+        )
         tiles.setCurrentTilemap(tilemap`level8`)
         info.setLife(1)
         game.splash("Sudden death")
@@ -595,6 +687,7 @@ function next_level () {
         }
         tiles.placeOnTile(snake_player, tiles.getTileLocation(3, 6))
         tiles.placeOnRandomTile(portal_lvl_1_lvl_2, assets.tile`myTile11`)
+        snake_player.ay = 350
     }
     if (level == 4) {
         game.gameOver(true)
@@ -632,43 +725,6 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile21`, function (sprite, 
     controller.moveSprite(snake_player)
 })
 controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
-    if (snake_player.image == img`
-        . . . c c c c c c c c c c . . . 
-        . . c c 6 6 7 1 1 1 1 1 6 c . . 
-        . . c 6 6 6 6 6 1 1 1 1 1 6 c . 
-        . . c 6 6 6 6 6 6 1 1 1 1 1 c . 
-        c c c 6 6 6 c 6 6 7 1 1 1 1 c . 
-        c 7 7 7 7 6 f c 7 7 2 7 7 6 c . 
-        . c 7 7 7 c c f 7 7 7 2 6 c . . 
-        . . c c c f 6 7 7 c c c c f . . 
-        . . . . f 6 7 7 c 6 7 7 7 7 f . 
-        . . . . f 7 7 7 7 7 7 7 7 7 7 f 
-        . . . . f 7 7 7 6 f 6 6 f 6 7 f 
-        . . . . c 7 7 7 c 6 6 6 6 c 7 c 
-        . . . . c 6 7 7 7 7 7 7 7 7 6 c 
-        . . . . . c 7 7 7 7 7 7 7 7 c . 
-        . . . . . . c 6 7 7 7 7 6 c . . 
-        . . . . . . . c c c c c c . . . 
-        `) {
-        snake_player.setImage(img`
-            . . . c c c c c c c c c c . . . 
-            . . c c 6 6 7 1 1 1 1 1 6 c . . 
-            . . c 6 6 6 6 6 1 1 1 1 1 6 c . 
-            . . c 6 6 6 6 6 6 1 1 1 1 1 c . 
-            c c c 6 6 6 c 6 6 7 1 1 1 1 c . 
-            c 7 7 7 7 6 f c 7 7 2 7 7 6 c . 
-            . c 7 7 7 c c f 7 7 7 2 6 c . . 
-            . . c c c f 6 7 7 c c c c f . . 
-            . . . . f 6 7 7 c 6 7 7 7 7 f . 
-            . . . . f 7 7 7 7 7 7 7 7 7 7 f 
-            . . . . f 7 7 7 6 f 6 6 f 6 7 f 
-            . . . . c 7 7 7 c 6 6 6 6 c 7 c 
-            . . . . c 6 7 7 7 7 7 7 7 7 6 c 
-            . . . . . c 7 7 7 7 7 7 7 7 c . 
-            . . . . . . c 6 7 7 7 7 6 c . . 
-            . . . . . . . c c c c c c . . . 
-            `)
-    }
     if (level > -1) {
         snake_player.setImage(img`
             . . . . . . . c c c c c c . . . 
@@ -687,6 +743,26 @@ controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
             . . c 6 6 6 6 6 1 1 1 1 1 6 c . 
             . . c c 6 6 7 1 1 1 1 1 6 c . . 
             . . . c c c c c c c c c c . . . 
+            `)
+    }
+    if (snake_player.kind() == SpriteKind.udplayer) {
+        snake_player.setImage(img`
+            . . . c c c c c c c c c c . . . 
+            . . c c 6 6 7 1 1 1 1 1 6 c . . 
+            . . c 6 6 6 6 6 1 1 1 1 1 6 c . 
+            . . c 6 6 6 6 6 6 1 1 1 1 1 c . 
+            c c c 6 6 6 c 6 6 7 1 1 1 1 c . 
+            c 7 7 7 7 6 f c 7 7 2 7 7 6 c . 
+            . c 7 7 7 c c f 7 7 7 2 6 c . . 
+            . . c c c f 6 7 7 c c c c f . . 
+            . . . . f 6 7 7 c 6 7 7 7 7 f . 
+            . . . . f 7 7 7 7 7 7 7 7 7 7 f 
+            . . . . f 7 7 7 6 f 6 6 f 6 7 f 
+            . . . . c 7 7 7 c 6 6 6 6 c 7 c 
+            . . . . c 6 7 7 7 7 7 7 7 7 6 c 
+            . . . . . c 7 7 7 7 7 7 7 7 c . 
+            . . . . . . c 6 7 7 7 7 6 c . . 
+            . . . . . . . c c c c c c . . . 
             `)
     }
 })
